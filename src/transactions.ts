@@ -1,4 +1,3 @@
-// don't edit or remove the type declaration
 type TransactionType = "income" | "expense";
 type Transaction = [TransactionType, number];
 
@@ -20,9 +19,7 @@ const transactions: Transaction[] = [
 // example:
 // filterIncomeTransactions(transactions); // => [["income", 1000], ["income", 1500], ["income", 700]]
 function filterIncomeTransactions(transactions: Transaction[]): Transaction[] {
-  // write your code here...
-
-  return []; // replace empty array with what you see is fit
+  return transactions.filter(([type]) => type === "income");
 }
 
 // `filterExpenseTransactions` function that:
@@ -31,9 +28,7 @@ function filterIncomeTransactions(transactions: Transaction[]): Transaction[] {
 // example:
 // filterExpenseTransactions(transactions); // => [["expense", 500], ["expense", 300]]
 function filterExpenseTransactions(transactions: Transaction[]): Transaction[] {
-  // write your code here...
-
-  return []; // replace empty array with what you see is fit
+  return transactions.filter(([type]) => type === "expense");
 }
 
 // `calculateTotalIncome` function that:
@@ -42,9 +37,9 @@ function filterExpenseTransactions(transactions: Transaction[]): Transaction[] {
 // example:
 // calculateTotalIncome(transactions); // => 3200  (1000 + 1500 + 700)
 function calculateTotalIncome(transactions: Transaction[]): number {
-  // write your code here...
-
-  return -1; // replace -1 with what you see is fit
+  return transactions
+    .filter(([type]) => type === "income")
+    .reduce((sum, [, amount]) => sum + amount, 0);
 }
 
 // `calculateTotalExpenses` function that:
@@ -53,9 +48,9 @@ function calculateTotalIncome(transactions: Transaction[]): number {
 // example:
 // calculateTotalExpenses(transactions); // => 800  (500 + 300)
 function calculateTotalExpenses(transactions: Transaction[]): number {
-  // write your code here...
-
-  return -1; // replace -1 with what you see is fit
+  return transactions
+    .filter(([type]) => type === "expense")
+    .reduce((sum, [, amount]) => sum + amount, 0);
 }
 
 // `calculateNetTotal` function that:
@@ -64,9 +59,9 @@ function calculateTotalExpenses(transactions: Transaction[]): number {
 // example:
 // calculateNetTotal(transactions); // => 2400  (3200 - 800)
 function calculateNetTotal(transactions: Transaction[]): number {
-  // write your code here...
-
-  return -1; // replace -1 with what you see is fit
+  return (
+    calculateTotalIncome(transactions) - calculateTotalExpenses(transactions)
+  );
 }
 
 // `filterSignificantTransactions` function that:
@@ -80,9 +75,7 @@ function filterSignificantTransactions(
   transactions: Transaction[],
   threshold: number
 ): Transaction[] {
-  // write your code here...
-
-  return []; // replace empty array with what you see is fit
+  return transactions.filter(([, amount]) => amount >= threshold);
 }
 
 export {
